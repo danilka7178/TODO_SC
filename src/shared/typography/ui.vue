@@ -17,7 +17,7 @@ const props = defineProps<Props>();
   </component>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
   .typography {
     font-family: 'PT Sans Caption', 'serif';
     font-style: normal;
@@ -60,7 +60,6 @@ const props = defineProps<Props>();
   }
 
   @media screen and (max-width: 640px) {
-
     .tag_h1 {
       font-size: 20px;
     }
@@ -69,5 +68,4 @@ const props = defineProps<Props>();
       font-size: 20px;
     }
   }
-
 </style>

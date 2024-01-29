@@ -25,7 +25,7 @@ let typographyText = type === 'opened' ? 'Открыто - ' + tasksOpenedCount:
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .task-info-badge{
   display: flex;
   align-items: center;

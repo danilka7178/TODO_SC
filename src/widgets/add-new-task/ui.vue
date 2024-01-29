@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 import {Typography} from "@/shared/typography";
+import {ButtonTaskAdd} from '@/shared/button-task-add';
 </script>
 
 <template>
 <div class="add-new-task">
-  <div class="add-new-task__header">
-    <Typography tagName="h2">Добавить задачу</Typography>
-  </div>
+  <Typography class="add-new-task__header" tagName="h2">Добавить задачу</Typography>
   <div class="add-new-task__content">
-    <span>BTN</span>
+    <ButtonTaskAdd />
     <span>INPUT</span>
   </div>
 </div>
@@ -21,6 +20,14 @@ import {Typography} from "@/shared/typography";
     padding: 40px 25px;
     border-radius: 48px;
 
+    @media screen and (max-width: 992px) {
+      min-width: 600px;
+    }
+
+    @media screen and (max-width: 640px) {
+      min-width: 343px;
+    }
+
     &__header{
       margin-bottom: 25px;
     }
@@ -31,15 +38,4 @@ import {Typography} from "@/shared/typography";
     }
   }
 
-  @media screen and (max-width: 992px) {
-    .add-new-task{
-      min-width: 600px;
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    .add-new-task{
-      min-width: 343px;
-    }
-  }
 </style>

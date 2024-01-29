@@ -1,24 +1,22 @@
 <script lang="ts" setup>
 import { Typography } from '@/shared/typography';
 import { Container } from "@/shared/container";
-import { CurrentTasksInfo } from "@/widgets/current-tasks-info";
+import { InfoAboutCurrentTasks } from "@/widgets/info-about-current-tasks";
 import { AddNewTask } from "@/widgets/add-new-task";
 </script>
 
 <template>
-  <div class="substrate">
-    <Container>
-      <Typography tagName="h1" bold>ToDo List Scloud</Typography>
-      <div class="top-blocks">
-        <CurrentTasksInfo />
-        <AddNewTask />
-      </div>
-    </Container>
-  </div>
+  <Container class="container">
+    <Typography tagName="h1" bold>ToDo List Scloud</Typography>
+    <div class="widget-blocks">
+      <InfoAboutCurrentTasks />
+      <AddNewTask />
+    </div>
+  </Container>
 </template>
 
 <style lang="scss" scoped>
-.substrate{
+.container{
   background-color: var(--color-light-gray);
   padding: 60px;
 
@@ -27,14 +25,11 @@ import { AddNewTask } from "@/widgets/add-new-task";
   }
 }
 
-.top-blocks{
+.widget-blocks{
   display: flex;
   gap: 20px;
-}
 
-
-@media screen and (max-width: 992px) {
-  .top-blocks{
+  @media screen and (max-width: 992px) {
     min-width: 600px;
     display: block;
   }

@@ -1,0 +1,1 @@
+export { default as InfoAboutCurrentTasks } from './ui.vue';
