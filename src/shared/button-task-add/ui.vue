@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 </script>
 
 <template>
@@ -14,7 +13,7 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: var(--color-orange);
+  background-color: $color-orange;
   cursor: pointer;
   position: relative;
 
@@ -28,8 +27,7 @@
 
     width: 18px;
     height: 2px;
-    background-color: var(--color-white);
-
+    background-color: $color-white;
 
     &--horizontal{
       transform: rotate(90deg);

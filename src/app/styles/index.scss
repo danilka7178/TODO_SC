@@ -1,2 +1,2 @@
-@use "./vars.scss";
-@import "./normalize.scss";
+@forward "./vars.scss";
+@forward "./normalize.scss";

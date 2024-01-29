@@ -21,7 +21,7 @@ let typographyText = type === 'opened' ? 'Открыто - ' + tasksOpenedCount:
 <template>
   <div class="task-info-badge">
     <Icon :type=iconType></Icon>
-    <Typography tagName="span" size="s" bold>{{ typographyText }}</Typography>
+    <Typography class="task-info-badge__text" tagName="span" size="s" bold>{{ typographyText }}</Typography>
   </div>
 </template>
 
@@ -29,11 +29,13 @@ let typographyText = type === 'opened' ? 'Открыто - ' + tasksOpenedCount:
 .task-info-badge{
   display: flex;
   align-items: center;
-  width: 100%;
-  min-width: 120px;
-  border: 1px var(--color-light-gray) solid;
+  justify-content: center;
+  border: 1px $color-light-gray solid;
   border-radius: 50px;
-  padding: 10px 20px;
-  gap: 8px;
+  padding: 8px 14px;
+
+  &__text{
+    margin-left: 10px;
+  }
 }
 </style>

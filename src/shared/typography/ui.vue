@@ -18,54 +18,54 @@ const props = defineProps<Props>();
 </template>
 
 <style lang="scss" scoped>
-  .typography {
-    font-family: 'PT Sans Caption', 'serif';
-    font-style: normal;
-    line-height: 150%;
-    color: var(--color-black);
-    margin-block-start: 0;
-    margin-block-end: 0;
-  }
+.typography {
+  font-family: 'PT Sans Caption', 'serif';
+  font-style: normal;
+  line-height: 150%;
+  color: $color-black;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
 
-  .bold { font-weight: 700; }
+.bold { font-weight: 700; }
 
-  .size_xs { font-size: 12px; }
-  .size_s { font-size: 14px; }
-  .size_m { font-size: 16px; }
-  .size_l { font-size: 20px; }
+.size_xs { font-size: 12px; }
+.size_s { font-size: 14px; }
+.size_m { font-size: 16px; }
+.size_l { font-size: 20px; }
+
+.tag_h1 {
+  font-size: 32px;
+  font-family: 'Montserrat', 'serif';
+}
+
+.tag_h2 {
+  font-size: 24px;
+}
+
+.tag_h3 {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 992px) {
+  .size_xl { font-size: 18px; }
 
   .tag_h1 {
-    font-size: 32px;
-    font-family: 'Montserrat', 'serif';
-  }
-
-  .tag_h2 {
     font-size: 24px;
   }
 
-  .tag_h3 {
+  .tag_h2 {
     font-size: 18px;
   }
+}
 
-  @media screen and (max-width: 992px) {
-    .size_xl { font-size: 18px; }
-
-    .tag_h1 {
-      font-size: 24px;
-    }
-
-    .tag_h2 {
-      font-size: 18px;
-    }
+@media screen and (max-width: 640px) {
+  .tag_h1 {
+    font-size: 20px;
   }
 
-  @media screen and (max-width: 640px) {
-    .tag_h1 {
-      font-size: 20px;
-    }
-
-    .tag_h3 {
-      font-size: 20px;
-    }
+  .tag_h3 {
+    font-size: 20px;
   }
+}
 </style>

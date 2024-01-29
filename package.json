@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "sass-loader": "^14.0.0",
     "vue": "^3.3.11"
   },
   "devDependencies": {
