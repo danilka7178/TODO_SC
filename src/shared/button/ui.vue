@@ -18,7 +18,15 @@ const {
   disabled = false,
 } = props;
 
-const classes = ['button', `textColor_${textColor}`, `color_${color}`, `decoration_${decoration}`, slots.icon ? 'haveIcon' : '']
+const classes = [
+  'button',
+  `textColor_${textColor}`,
+  `color_${color}`,
+  `decoration_${decoration}`,
+  slots.icon ? 'haveIcon' : '',
+  `decoration_${decoration}`,
+  `disabled_${disabled}`,
+]
 </script>
 
 <template>
@@ -40,6 +48,14 @@ const classes = ['button', `textColor_${textColor}`, `color_${color}`, `decorati
 
   &:hover{
     opacity: .7;
+  }
+
+  &.disabled_true{
+    cursor: unset;
+
+    &:hover{
+      opacity: unset;
+    }
   }
 
   &.haveIcon:deep(.typography){

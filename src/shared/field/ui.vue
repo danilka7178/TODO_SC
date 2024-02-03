@@ -5,18 +5,18 @@ interface Props {
   disabled?: boolean;
   placeholder?: string;
   clearInput?: boolean;
+  defaultText?: string;
 }
+const props = defineProps<Props>();
+const { disabled = false, placeholder = '', clearInput = false, defaultText } = props;
+
+const emit = defineEmits(['onAdd', 'onChange']);
+const slots = useSlots();
 
 const showIcon = ref(window.innerWidth < 992);
 const isFocused = ref(false);
-const todo = ref('');
+const todo = ref(defaultText);
 const input = ref<null | HTMLDivElement>(null);
-
-const slots = useSlots();
-const props = defineProps<Props>();
-const emit = defineEmits(['onAdd', 'onChange']);
-
-const { disabled = false, placeholder = '' } = props;
 
 const onCancel = () => {
   if(!todo.value){
@@ -120,38 +120,6 @@ watch(() => props.clearInput, () => {
 
     &:hover{
       border: 1px solid $color-orange;
-    }
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .field{
-    &__input{
-      min-width: 350px;
-    }
-  }
-}
-
-@media screen and (max-width: 1060px) {
-  .field{
-    &__input{
-      min-width: 300px;
-    }
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .field{
-    &__input{
-      min-width: 450px;
-    }
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .field{
-    &__input{
-      min-width: unset;
     }
   }
 }
