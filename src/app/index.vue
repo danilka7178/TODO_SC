@@ -3,6 +3,7 @@ import { Typography } from '@/shared/typography';
 import { Container } from "@/shared/container";
 import { AboutTasks } from "@/widgets/about-tasks";
 import { AddNewTask } from "@/widgets/add-new-task";
+import { TasksList } from "@/widgets/tasks-list";
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import { AddNewTask } from "@/widgets/add-new-task";
         <AboutTasks class="widget-blocks__widget"/>
         <AddNewTask class="widget-blocks__widget"/>
       </div>
+      <TasksList/>
     </Container>
   </div>
 </template>
@@ -39,6 +41,7 @@ import { AddNewTask } from "@/widgets/add-new-task";
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 40px;
 
   &__widget{
     max-width: 588px;
@@ -57,6 +60,7 @@ import { AddNewTask } from "@/widgets/add-new-task";
   .widget-blocks{
     display: grid;
     grid-row-gap: 30px;
+    margin-bottom: 15px;
 
     &__widget{
       max-width: 550px;
