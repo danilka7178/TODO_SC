@@ -10,7 +10,7 @@ interface Props {
 const showIcon = ref(window.innerWidth < 992);
 const isFocused = ref(false);
 const todo = ref('');
-const input = ref(null);
+const input = ref<null | HTMLDivElement>(null);
 
 const slots = useSlots();
 const props = defineProps<Props>();
