@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { Typography } from '@/shared/typography';
-  import { TaskInfoBadge } from "@/shared/task-info-badge";
+  import { TaskInfoBadge } from "./task-info-badge";
 </script>
 
 <template>
