@@ -135,7 +135,7 @@ const showOrHideMoreTasks = () => {
   &__header{
     display: flex;
     justify-content: space-between;
-    margin: 0px 20px 20px 0px;
+    margin: 0 20px 20px 0;
   }
 
   &__task{
