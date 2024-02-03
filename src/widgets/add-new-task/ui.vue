@@ -2,9 +2,9 @@
 import {ref} from "vue";
 
 import {Typography} from "@/shared/typography";
-import {ButtonTaskAdd} from '@/shared/button-task-add';
 import {Field} from '@/shared/field';
 import {Icon} from "@/shared/icon";
+import {ButtonTaskAdd} from '@/featured/button-task-add';
 
 const inputValue = ref('');
 const clearInput = ref(false);

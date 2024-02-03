@@ -4,24 +4,17 @@ import {computed, reactive, ref} from "vue";
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
 import {Icon} from '@/shared/icon';
-import {Modal} from '@/shared/modal'
+import {Task} from './task';
 
-const isOpenModal = ref(false);
-const taskToChange = ref (null);
+const isShowingMore = ref(false);
+const tasksList = ref<null | HTMLDivElement>(null);
 
-const statusTexts = ref({
-  open: 'Открыт',
-  inWork: 'В работе',
-  closed: 'Закрыт',
-});
 
 const buttonMoreTasksText = ref({
   showMore: 'Показать ещё',
   hideMore: 'Скрыть',
 });
 
-const isShowingMore = ref(false);
-const tasksList = ref(null);
 
 const tasks = reactive([
 {
@@ -79,10 +72,13 @@ const sortedTasks = computed(() => {
   });
 })
 
-const changeTask = (taskId: number) => {
-  taskToChange.value = tasks[taskId];
-  isOpenModal.value = !isOpenModal.value;
-}
+const sortAndSlicedTasks = computed(() => {
+  return tasks.sort((a,b) => {
+    if(a.status < b.status) return 1;
+    if(a.status > b.status) return -1;
+    return 0;
+  }).slice(0, 5);
+})
 
 const showOrHideMoreTasks = () => {
   if(isShowingMore.value){
@@ -94,35 +90,34 @@ const showOrHideMoreTasks = () => {
 </script>
 
 <template>
-  <Modal :open="isOpenModal" @close="isOpenModal = !isOpenModal">
-    <div>123</div>
-  </Modal>
   <div class="tasks-list" ref="tasksList">
     <div class="tasks-list__header">
       <Typography bold tag-name="h3">Задачи</Typography>
       <Typography bold tag-name="h3">Статус</Typography>
     </div>
-    <div class="tasks-list__task task" v-for="task in isShowingMore ? sortedTasks : sortedTasks.slice(0, 5)" :key="task.id">
-      <div class="task__text">
-        <Typography tag-name="span">{{ task.text }}</Typography>
-      </div>
-      <div class="task__status">
-        <Button @click="changeTask(task.id)" text-color="black" color="gray">
-          {{ statusTexts[task.status] }}
-        </Button>
-      </div>
+    <div class="tasks-list__body">
+      <Task
+          v-for="task in isShowingMore ? sortedTasks : sortAndSlicedTasks"
+          :key="task.id"
+          :task="task"
+      />
     </div>
-    <div class="tasks-list__footer" v-if="tasks.length >= 5">
-      <Button class="tasks-list__showOrHideButton" @click="showOrHideMoreTasks" text-color="main" decoration="outline" color="white">
-        <template v-slot:icon v-if="isShowingMore">
-          <Icon type="hideMore"/>
-        </template>
-        <template v-slot:icon v-else>
-          <Icon type="showMore"/>
-        </template>
-        {{ isShowingMore ? buttonMoreTasksText["hideMore"] : buttonMoreTasksText["showMore"] }}
-      </Button>
-    </div>
+    <Button
+        class="tasks-list__showOrHideButton"
+        v-if="tasks.length >= 5"
+        @click="showOrHideMoreTasks"
+        text-color="main"
+        decoration="outline"
+        color="white"
+    >
+      <template v-slot:icon v-if="isShowingMore">
+        <Icon type="hideMore"/>
+      </template>
+      <template v-slot:icon v-else>
+        <Icon type="showMore"/>
+      </template>
+      {{ isShowingMore ? buttonMoreTasksText["hideMore"] : buttonMoreTasksText["showMore"] }}
+    </Button>
   </div>
 </template>
 
@@ -138,31 +133,12 @@ const showOrHideMoreTasks = () => {
     margin: 0 20px 20px 0;
   }
 
-  &__task{
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-  }
-
-  &__footer{
-    margin-top: 40px;
+  &__body{
+    margin-bottom: 40px;
   }
 
   &__showOrHideButton{
     max-width: max-content;
-  }
-}
-
-.task{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &:not(:last-child){
-    border-bottom: 1px $color-light-gray solid;
-  }
-
-  &__text{
-    max-width: 85%;
   }
 }
 

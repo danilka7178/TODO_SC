@@ -4,9 +4,11 @@ import { Container } from "@/shared/container";
 import { AboutTasks } from "@/widgets/about-tasks";
 import { AddNewTask } from "@/widgets/add-new-task";
 import { TasksList } from "@/widgets/tasks-list";
+import {Modal} from '@/shared/modal';
 </script>
 
 <template>
+  <Modal />
   <div class="substrate">
     <Container class="container">
       <Typography class="app-name" tagName="h1" bold>ToDo List Scloud</Typography>
@@ -20,7 +22,6 @@ import { TasksList } from "@/widgets/tasks-list";
 </template>
 
 <style lang="scss" scoped>
-
 .substrate{
   background-color: $color-light-gray;
 }
