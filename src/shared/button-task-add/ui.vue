@@ -17,6 +17,10 @@
   cursor: pointer;
   position: relative;
 
+  &:hover{
+    opacity: .8;
+  }
+
   .plus-strip{
     position: absolute;
     left: 0;

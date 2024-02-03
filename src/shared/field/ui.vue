@@ -4,7 +4,7 @@ import {ref, useSlots, watch} from 'vue';
 interface Props {
   disabled?: boolean;
   placeholder?: string;
-  clearInput: boolean;
+  clearInput?: boolean;
 }
 
 const showIcon = ref(window.innerWidth < 992);
