@@ -4,7 +4,7 @@ import {ref, computed} from "vue";
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
 
-import {DeleteOrEditTask} from "./delete-or-edit-task";
+import {DeleteOrEditTask} from "@/featured/delete-or-edit-task";
 import { useModalStore } from '@/shared/modal';
 const modal = useModalStore();
 
@@ -30,10 +30,7 @@ const statusText = computed(() => {
 const changeTask = () => {
   modal.open({
     component: DeleteOrEditTask,
-    componentProps: {
-      title: 'This is the title',
-      body: 'Some text in the Modal Body'
-    }
+    componentProps: props.task,
   })
 }
 </script>
