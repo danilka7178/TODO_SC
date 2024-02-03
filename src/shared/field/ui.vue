@@ -4,11 +4,10 @@ import {ref, useSlots, watch} from 'vue';
 interface Props {
   disabled?: boolean;
   placeholder?: string;
-  clearInput?: boolean;
   defaultText?: string;
 }
 const props = defineProps<Props>();
-const { disabled = false, placeholder = '', clearInput = false, defaultText } = props;
+const { disabled = false, placeholder = '', defaultText } = props;
 
 const emit = defineEmits(['onAdd', 'onChange']);
 const slots = useSlots();

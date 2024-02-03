@@ -7,7 +7,6 @@ import {Icon} from "@/shared/icon";
 import {ButtonTaskAdd} from '@/featured/button-task-add';
 
 const inputValue = ref('');
-const clearInput = ref(false);
 
 const onChangeSearch = (value: string) => {
   if(!value.length){
@@ -22,7 +21,6 @@ const onAddNewTodo = (text: string) => {
 };
 const clickButtonAdd = () => {
   addNewTodo(inputValue.value);
-  clearInput.value = !clearInput.value;
 }
 
 const addNewTodo = (todoText: string) => {
@@ -39,7 +37,7 @@ const addNewTodo = (todoText: string) => {
   <Typography class="add-new-task__header" tagName="h2">Добавить задачу</Typography>
   <div class="add-new-task__content">
     <ButtonTaskAdd @click="clickButtonAdd"/>
-    <Field placeholder="Текст" @onAdd="onAddNewTodo" @onChange="onChangeSearch" :clearInput="clearInput">
+    <Field placeholder="Текст" @onAdd="onAddNewTodo" @onChange="onChangeSearch">
       <template #rightIcon>
         <Icon type='orangeClose'/>
       </template>

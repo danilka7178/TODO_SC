@@ -18,9 +18,9 @@ onUnmounted(() => document.removeEventListener("keyup", handleKeyup));
     <div class="vue-modal" v-if="modal.state.component" @click.self="modal.close">
       <transition name="drop-in">
         <Component
-          :is="modal.state.component"
-          v-bind="modal.state.componentProps"
-          @close="modal.close()"
+            :is="modal.state.component"
+            v-bind="modal.state.componentProps"
+            @close="modal.close()"
         />
       </transition>
     </div>

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, type Component } from 'vue'
+import {ref, type Component} from 'vue'
 
 interface ModalState {
     component: Component | null,
