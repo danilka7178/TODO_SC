@@ -116,7 +116,7 @@ watch(() => props.value, () => {
     border: 1px solid $color-light-gray;
     color: $color-black;
     transition: .3s ease-in-out;
-    min-width: 400px;
+    min-width: -webkit-fill-available;
 
     &:hover{
       border: 1px solid $color-orange;

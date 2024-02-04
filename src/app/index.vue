@@ -14,7 +14,7 @@ import {Modal} from '@/shared/modal';
       <Typography class="app-name" tagName="h1" bold>ToDo List Scloud</Typography>
       <div class="widget-blocks">
         <AboutTasks class="widget-blocks__widget"/>
-        <AddNewTask class="widget-blocks__widget"/>
+        <AddNewTask class="widget-blocks__widget add-task"/>
       </div>
       <TasksList/>
     </Container>
@@ -27,7 +27,7 @@ import {Modal} from '@/shared/modal';
 }
 
 .container{
-  padding: 60px 20px;
+  padding: 60px 10px 60px 10px;
 
   &--white{
     background-color: $color-white;
@@ -44,16 +44,12 @@ import {Modal} from '@/shared/modal';
   flex-wrap: wrap;
   margin-bottom: 40px;
 
-  &__widget{
-    max-width: 588px;
+  .add-task{
+    flex-grow: 1;
   }
 }
 
 @media screen and (max-width: 992px) {
-  .container{
-    padding: 20px 10px;
-  }
-
   .app-name{
     margin-bottom: 10px;
   }
@@ -62,16 +58,10 @@ import {Modal} from '@/shared/modal';
     display: grid;
     grid-row-gap: 30px;
     margin-bottom: 15px;
-
-    &__widget{
-      max-width: 550px;
-    }
   }
 }
 
 @media screen and (max-width: 640px) {
-  .container{
-    padding: 10px 0;
-  }
+
 }
 </style>

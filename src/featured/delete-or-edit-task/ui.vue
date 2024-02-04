@@ -74,18 +74,25 @@ watch(() => statusTask.value, () => {
       <Typography class="editing-modal__header" tag-name="h2">Изменение задачи</Typography>
       <Field class="editing-modal__input" :default-text="text" @onChange="changeTaskText"/>
       <div class="editing-modal__choose-task-status" v-if="renderComponent">
-        <Button textColor="white" color="orange" :disabled="'open' === statusTask"
-                @click="changeTaskStatus('open')"
+        <Button
+            textColor="white" color="orange"
+            :disabled="'open' === statusTask"
+            @click="changeTaskStatus('open')"
         >
           Отложить
         </Button>
-        <Button textColor="white" color="orange" :disabled="'inWork' === statusTask"
-                @click="changeTaskStatus('inWork')"
+        <Button
+            textColor="white" color="orange"
+            :disabled="'inWork' === statusTask || 'closed' === oldStatusTask"
+            @click="changeTaskStatus('inWork')"
         >
           В работу
         </Button>
-        <Button textColor="white" color="orange" :disabled="'closed' === statusTask"
-                @click="changeTaskStatus('closed')"
+        <Button
+            textColor="white"
+            color="orange"
+            :disabled="'closed' === statusTask"
+            @click="changeTaskStatus('closed')"
         >
           Закрыть
         </Button>

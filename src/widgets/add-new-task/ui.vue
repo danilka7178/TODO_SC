@@ -65,6 +65,10 @@ const addNewTodo = (todoText: string) => {
   &__content{
     display: flex;
     gap: 0 15px;
+
+    &:deep(.field){
+      flex-grow: 1;
+    }
   }
 }
 </style>

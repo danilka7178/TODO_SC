@@ -8,6 +8,8 @@ import {DeleteOrEditTask} from "@/featured/delete-or-edit-task";
 import { useModalStore } from '@/shared/modal';
 const modal = useModalStore();
 
+const isMobile = ref( window.innerWidth < 640);
+
 interface Props {
   task: {
     text: string,
@@ -41,7 +43,12 @@ const changeTask = () => {
       <Typography tag-name="span">{{ task.text }}</Typography>
     </div>
     <div class="task__status">
-      <Button @click="changeTask" text-color="black" color="gray">
+      <Button
+          @click="changeTask"
+          :text-color="isMobile ? 'main' : 'black'"
+          :color="isMobile ? 'white' : 'gray'"
+          :decoration="isMobile ? 'outline' : 'none'"
+      >
         {{ statusText }}
       </Button>
     </div>
@@ -62,6 +69,45 @@ const changeTask = () => {
 
   &__text{
     max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .task{
+    &__text{
+      max-width: 75%;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .task{
+    display: block;
+    padding: 20px;
+    border-radius: 50px;
+    background-color: $color-white;
+
+    &:not(:last-child){
+      border-bottom: unset;
+    }
+
+    &__text{
+      max-width: unset;
+      margin-bottom: 15px;
+
+      &:deep(.typography){
+        font-weight: 700;
+      }
+    }
+
+    &__status{
+      &:deep(button){
+        display: block;
+      }
+      &:deep(.typography){
+        font-weight: 700;
+      }
+    }
   }
 }
 </style>

@@ -11,6 +11,7 @@ import {Task} from './task';
 
 const isShowingMore = ref(false);
 const tasksList = ref<null | HTMLDivElement>(null);
+const isMobile = ref( window.innerWidth < 640);
 
 
 const buttonMoreTasksText = ref({
@@ -47,7 +48,7 @@ const showOrHideMoreTasks = () => {
   <div class="tasks-list" ref="tasksList">
     <div class="tasks-list__header">
       <Typography bold tag-name="h3">Задачи</Typography>
-      <Typography bold tag-name="h3">Статус</Typography>
+      <Typography v-if="!isMobile" bold tag-name="h3">Статус</Typography>
     </div>
     <div class="tasks-list__body">
       <Task
@@ -58,7 +59,7 @@ const showOrHideMoreTasks = () => {
     </div>
     <Button
         class="tasks-list__showOrHideButton"
-        v-if="store.todos.length >= 5"
+        v-if="store.todos.length > 5"
         @click="showOrHideMoreTasks"
         text-color="main"
         decoration="outline"
@@ -98,7 +99,13 @@ const showOrHideMoreTasks = () => {
 
 @media screen and (max-width: 992px) {
   .tasks-list{
-    padding: 20px 15px;
+    padding: 20px 25px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .tasks-list{
+    background-color: unset;
   }
 }
 </style>

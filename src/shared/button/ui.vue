@@ -95,4 +95,10 @@ const classes = [
     color: $color-black;
   }
 }
+
+@media screen and (max-width: 640px) {
+  .button {
+    padding: 5px 10px;
+  }
+}
 </style>
