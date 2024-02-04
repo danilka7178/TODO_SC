@@ -11,7 +11,6 @@ const handleKeyup = (event: any) => {
 
 onMounted(() => document.addEventListener("keyup", handleKeyup));
 onUnmounted(() => document.removeEventListener("keyup", handleKeyup));
-//TODO! Warn - Vue received a Component that was made a reactive object.
 </script>
 
 <template>
