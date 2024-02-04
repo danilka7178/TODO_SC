@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { Typography } from '@/shared/typography';
 import { Icon } from "@/shared/icon";
+
+import {computed} from "vue";
+import { useTodoStore } from '@/entities/todo/store';
+const store = useTodoStore();
+
 interface Props {
   type: 'opened' | 'inWork' | 'closed',
 }
@@ -8,14 +13,13 @@ interface Props {
 const props = defineProps<Props>();
 const { type } = props;
 
-let tasksOpenedCount = 1;
-let tasksInWorkCount = 2;
-let tasksClosedCount = 2;
-
 let iconType = type + 'Tasks';
-let typographyText = type === 'opened' ? 'Открыто - ' + tasksOpenedCount:
-                     type === 'inWork' ? 'В работе - ' + tasksInWorkCount :
-                                         'Закрыто - ' + tasksClosedCount ;
+
+const typographyText = computed(() => {
+  return type === 'opened' ? 'Открыто - ' + store.openTodosCount :
+         type === 'inWork' ? 'В работе - ' + store.inWorkTodosCount :
+         'Закрыто - ' + store.closedTodosCount ;
+})
 </script>
 
 <template>

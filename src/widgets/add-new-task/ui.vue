@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import {ref} from "vue";
+import { v4 as uuidv4 } from 'uuid';
 
 import {Typography} from "@/shared/typography";
 import {Field} from '@/shared/field';
 import {Icon} from "@/shared/icon";
 import {ButtonTaskAdd} from '@/featured/button-task-add';
+
+import { useTodoStore } from '@/entities/todo/store';
+const store = useTodoStore();
 
 const inputValue = ref('');
 
@@ -16,9 +20,6 @@ const onChangeSearch = (value: string) => {
   inputValue.value = value;
 };
 
-const onAddNewTodo = (text: string) => {
-  addNewTodo(text);
-};
 const clickButtonAdd = () => {
   addNewTodo(inputValue.value);
 }
@@ -28,7 +29,12 @@ const addNewTodo = (todoText: string) => {
     return
   }
 
-  console.log('NEW TODO TEXT TO ADD: ', todoText)
+  store.addTodo({
+    text: todoText,
+    id: uuidv4(),
+  });
+
+  inputValue.value = '';
 }
 </script>
 
@@ -37,7 +43,7 @@ const addNewTodo = (todoText: string) => {
   <Typography class="add-new-task__header" tagName="h2">Добавить задачу</Typography>
   <div class="add-new-task__content">
     <ButtonTaskAdd @click="clickButtonAdd"/>
-    <Field placeholder="Текст" @onAdd="onAddNewTodo" @onChange="onChangeSearch">
+    <Field placeholder="Текст" @onAdd="addNewTodo" @onChange="onChangeSearch" :value="inputValue">
       <template #rightIcon>
         <Icon type='orangeClose'/>
       </template>

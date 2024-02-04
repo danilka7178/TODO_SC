@@ -5,9 +5,10 @@ interface Props {
   disabled?: boolean;
   placeholder?: string;
   defaultText?: string;
+  value?: string;
 }
 const props = defineProps<Props>();
-const { disabled = false, placeholder = '', defaultText } = props;
+const { disabled = false, placeholder = '', defaultText = '' } = props;
 
 const emit = defineEmits(['onAdd', 'onChange']);
 const slots = useSlots();
@@ -16,14 +17,6 @@ const showIcon = ref(window.innerWidth < 992);
 const isFocused = ref(false);
 const todo = ref(defaultText);
 const input = ref<null | HTMLDivElement>(null);
-
-const onCancel = () => {
-  if(!todo.value){
-    return
-  }
-
-  todo.value = '';
-};
 
 const calcIconShow = (didWeShowIcon: boolean) => {
   if(didWeShowIcon){
@@ -38,6 +31,14 @@ const calcIconShow = (didWeShowIcon: boolean) => {
 
   showIcon.value = false;
 }
+
+const onCancel = () => {
+  if(!todo.value){
+    return
+  }
+
+  todo.value = '';
+};
 
 const onInput = (eventTarget: EventTarget | null) => {
   if (!eventTarget) return;
@@ -54,8 +55,8 @@ const blurInput = () => {
   showIcon.value = window.innerWidth < 992;
 }
 
-const onAddTodo = (text: string) => {
-  if(!text.length){
+const onAddTodo = (text: string | null) => {
+  if(text && !text.length){
     return
   }
 
@@ -64,11 +65,11 @@ const onAddTodo = (text: string) => {
   input.value?.blur();
 }
 
-watch(() => props.clearInput, () => {
-  todo.value = '';
-  input.value?.blur();
-});
-
+watch(() => props.value, () => {
+  if(!props.value){
+    todo.value = '';
+  }
+})
 </script>
 
 <template>

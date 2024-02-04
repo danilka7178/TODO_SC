@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import {computed, reactive, ref} from "vue";
+import {computed, ref} from "vue";
+
+import { useTodoStore } from '@/entities/todo/store';
+const store = useTodoStore();
 
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
@@ -15,57 +18,8 @@ const buttonMoreTasksText = ref({
   hideMore: 'Скрыть',
 });
 
-
-const tasks = reactive([
-{
-  id: 0,
-  text: 'Поднять инфрастуктуру проекта',
-  status: 'open',
-},
-{
-  id: 1,
-  text: 'Проснуться, улыбнуться, сделать отжимания, слетать на Марс и прочитать книгу',
-  status: 'inWork',
-},
-{
-  id: 2,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'closed',
-},
-{
-  id: 3,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'open',
-},
-{
-  id: 4,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'open',
-},
-{
-  id: 5,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'open',
-},
-{
-  id: 6,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'closed',
-},
-{
-  id: 7,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'inWork',
-},
-{
-  id: 8,
-  text: 'Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог Спеть - Знаешь ли ты, вдоль ночных дорог',
-  status: 'inWork',
-}
-])
-
 const sortedTasks = computed(() => {
-  return tasks.sort((a,b) => {
+  return store.todos.sort((a,b) => {
     if(a.status < b.status) return 1;
     if(a.status > b.status) return -1;
     return 0;
@@ -73,7 +27,7 @@ const sortedTasks = computed(() => {
 })
 
 const sortAndSlicedTasks = computed(() => {
-  return tasks.sort((a,b) => {
+  return store.todos.sort((a,b) => {
     if(a.status < b.status) return 1;
     if(a.status > b.status) return -1;
     return 0;
@@ -104,7 +58,7 @@ const showOrHideMoreTasks = () => {
     </div>
     <Button
         class="tasks-list__showOrHideButton"
-        v-if="tasks.length >= 5"
+        v-if="store.todos.length >= 5"
         @click="showOrHideMoreTasks"
         text-color="main"
         decoration="outline"
