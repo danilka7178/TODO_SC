@@ -57,4 +57,8 @@ export const useTodoStore = defineStore('todo', () => {
         closedTodosCount,
         todos
     };
-});
+},
+    {
+        persist: true
+    }
+);
