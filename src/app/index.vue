@@ -4,6 +4,7 @@ import { Container } from "@/shared/container";
 import { AboutTasks } from "@/widgets/about-tasks";
 import { AddNewTask } from "@/widgets/add-new-task";
 import { TasksList } from "@/widgets/tasks-list";
+import { TasksBoard } from "@/widgets/tasks-board";
 import {Modal} from '@/shared/modal';
 </script>
 
@@ -19,6 +20,9 @@ import {Modal} from '@/shared/modal';
       <TasksList/>
     </Container>
   </div>
+  <Container class="container--white">
+    <TasksBoard/>
+  </Container>
 </template>
 
 <style lang="scss" scoped>
