@@ -13,6 +13,7 @@
   "dependencies": {
     "pinia": "^2.1.7",
     "sass-loader": "^14.0.0",
+    "uuid": "^9.0.1",
     "vue": "^3.3.11"
   },
   "devDependencies": {
