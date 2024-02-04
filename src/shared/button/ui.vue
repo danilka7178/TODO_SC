@@ -50,14 +50,6 @@ const classes = [
     opacity: .7;
   }
 
-  &.disabled_true{
-    cursor: unset;
-
-    &:hover{
-      opacity: unset;
-    }
-  }
-
   &.haveIcon:deep(.typography){
     margin-right: 10px;
   }
@@ -88,6 +80,19 @@ const classes = [
 
   &.decoration_outline{
     border: 2px $color-orange solid;
+  }
+
+  &.disabled_true{
+    cursor: unset;
+    background-color: $color-light-gray;
+
+    &:hover{
+      opacity: unset;
+    }
+  }
+
+  &.disabled_true:deep(.typography){
+    color: $color-black;
   }
 }
 </style>
