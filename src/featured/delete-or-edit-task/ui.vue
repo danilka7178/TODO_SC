@@ -4,15 +4,67 @@ import {Typography} from "@/shared/typography";
 import {Field} from "@/shared/field";
 import {Button} from "@/shared/button";
 
-defineEmits(['close']);
+import { v4 as uuidv4 } from 'uuid';
+import {ref, nextTick, watch} from 'vue';
 
-defineProps<{
+import { useTodoStore } from '@/entities/todo/store';
+const store = useTodoStore();
+
+const emit = defineEmits(['close']);
+const props = defineProps<{
   text: string
   id: number
   status: string
 }>();
 
+const statusTask = ref(props.status);
+const oldStatusTask = ref(props.status);
+const oldTextTask = ref(props.text);
+const textTask = ref(props.text);
+const renderComponent = ref(true);
+const sameText = ref(true);
+const sameStatus = ref(true);
+
+const handleClickDeleteTask = (id: number) => {
+  store.removeTodo(id);
+  emit('close');
+}
+const handleClickEditTask = (id: number) => {
+  store.removeTodo(id);
+  store.addTodo({
+    text: textTask.value,
+    id: uuidv4(),
+    status: statusTask.value,
+  });
+  emit('close');
+}
+
+const changeTaskStatus = (newStatus: string) => {
+  statusTask.value = newStatus;
+}
+
+const changeTaskText = (taskText: string) => {
+  textTask.value = taskText;
+}
+
+const reRenderUI = async () => {
+  renderComponent.value = false;
+
+  await nextTick();
+  renderComponent.value = true;
+}
+
+watch(() => textTask.value, () => {
+  sameText.value = oldTextTask.value === textTask.value;
+  reRenderUI();
+})
+
+watch(() => statusTask.value, () => {
+  sameStatus.value = statusTask.value === oldStatusTask.value;
+  reRenderUI();
+})
 </script>
+
 <template>
   <div class="vue-modal-inner">
     <div class="vue-modal-inner__icon" @click="$emit('close')">
@@ -20,30 +72,40 @@ defineProps<{
     </div>
     <div class="vue-modal-inner__content editingModal">
       <Typography class="editing-modal__header" tag-name="h2">Изменение задачи</Typography>
-      <Field class="editing-modal__input" :default-text="text"/>
-      <div class="editing-modal__choose-task-status">
-        <Button :textColor="status !== 'open' ? 'white' : 'black'"
-                :color="status !== 'open' ? 'orange' : 'gray'"
-                :disabled="status === 'open'"
+      <Field class="editing-modal__input" :default-text="text" @onChange="changeTaskText"/>
+      <div class="editing-modal__choose-task-status" v-if="renderComponent">
+        <Button textColor="white" color="orange" :disabled="'open' === statusTask"
+                @click="changeTaskStatus('open')"
         >
           Отложить
         </Button>
-        <Button :textColor="status !== 'inWork' ? 'white' : 'black'"
-                :color="status !== 'inWork' ? 'orange' : 'gray'"
-                :disabled="status === 'inWork'"
+        <Button textColor="white" color="orange" :disabled="'inWork' === statusTask"
+                @click="changeTaskStatus('inWork')"
         >
           В работу
         </Button>
-        <Button :textColor="status !== 'closed' ? 'white' : 'black'"
-                :color="status !== 'closed' ? 'orange' : 'gray'"
-                :disabled="status === 'closed'"
+        <Button textColor="white" color="orange" :disabled="'closed' === statusTask"
+                @click="changeTaskStatus('closed')"
         >
           Закрыть
         </Button>
       </div>
-      <div class="editing-modal__confirm-buttons">
-        <Button textColor="white" color="orange">Применить</Button>
-        <Button textColor="main" color="white" decoration="outline">Удалить задачу</Button>
+      <div class="editing-modal__confirm-buttons" v-if="renderComponent">
+        <Button
+            textColor="white"
+            color="orange"
+            :disabled="sameText && sameStatus"
+            @click="handleClickEditTask(id)"
+        >
+          Применить
+        </Button>
+        <Button textColor="main"
+                color="white"
+                decoration="outline"
+                @click="handleClickDeleteTask(id)"
+        >
+          Удалить задачу
+        </Button>
       </div>
     </div>
   </div>
