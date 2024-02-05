@@ -28,7 +28,7 @@ onUnmounted(() => document.removeEventListener("keyup", handleKeyup));
   </transition>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .vue-modal {
   position: fixed;
   top: 0;

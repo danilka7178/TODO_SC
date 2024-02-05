@@ -1,1 +1,1 @@
-export { default as TaskCountBadge } from "./ui.vue";
+export { default as TaskCountBadge } from "./index.vue";
