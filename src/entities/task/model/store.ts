@@ -1,9 +1,9 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import type { Todo } from './types';
+import {type Task} from './types';
 
-export const useTodoStore = defineStore('todo', () => {
-    const todos = ref<Todo[]>([
+export const useTasksStore = defineStore('tasks', () => {
+    const tasks = ref<Task[]>([
         {
             id: 0,
             text: 'Сварить пельмени',
@@ -31,31 +31,31 @@ export const useTodoStore = defineStore('todo', () => {
         }
     ]);
 
-    function addTodo(todo: Todo) {
-        if(todo.status){
-            todos.value.unshift(todo);
+    function addTask(task: Task) {
+        if(task.status){
+            tasks.value.unshift(task);
             return
         }
 
-        todo.status = 'open';
-        todos.value.unshift(todo);
+        task.status = 'open';
+        tasks.value.unshift(task);
     }
 
-    function removeTodo(id: number) {
-        todos.value = todos.value.filter((todo: Todo) => todo.id !== id);
+    function removeTask(id: number) {
+        tasks.value = tasks.value.filter((task: Task) => task.id !== id);
     }
 
-    const openTodosCount = computed(() => todos.value.filter((todo) => todo.status === 'open').length);
-    const inWorkTodosCount = computed(() => todos.value.filter((todo) => todo.status === 'inWork').length);
-    const closedTodosCount = computed(() => todos.value.filter((todo) => todo.status === 'closed').length);
+    const openTasksCount = computed(() => tasks.value.filter((task) => task.status === 'open').length);
+    const inWorkTasksCount = computed(() => tasks.value.filter((task) => task.status === 'inWork').length);
+    const closedTasksCount = computed(() => tasks.value.filter((task) => task.status === 'closed').length);
 
     return {
-        addTodo,
-        removeTodo,
-        openTodosCount,
-        inWorkTodosCount,
-        closedTodosCount,
-        todos
+        tasks,
+        addTask,
+        removeTask,
+        openTasksCount,
+        inWorkTasksCount,
+        closedTasksCount
     };
 },
     {

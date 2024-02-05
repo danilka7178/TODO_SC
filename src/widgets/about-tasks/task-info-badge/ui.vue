@@ -3,8 +3,8 @@ import { Typography } from '@/shared/typography';
 import { Icon } from "@/shared/icon";
 
 import {computed} from "vue";
-import { useTodoStore } from '@/entities/todo/store';
-const store = useTodoStore();
+import { useTasksStore } from '@/entities/task/model/store';
+const store = useTasksStore();
 
 interface Props {
   type: 'opened' | 'inWork' | 'closed',
@@ -16,9 +16,9 @@ const { type } = props;
 let iconType = type + 'Tasks';
 
 const typographyText = computed(() => {
-  return type === 'opened' ? 'Открыто - ' + store.openTodosCount :
-         type === 'inWork' ? 'В работе - ' + store.inWorkTodosCount :
-         'Закрыто - ' + store.closedTodosCount ;
+  return type === 'opened' ? 'Открыто - ' + store.openTasksCount :
+         type === 'inWork' ? 'В работе - ' + store.inWorkTasksCount :
+         'Закрыто - ' + store.closedTasksCount ;
 })
 </script>
 

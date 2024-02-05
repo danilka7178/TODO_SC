@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import {computed, ref} from "vue";
 
-import { useTodoStore } from '@/entities/todo/store';
-const store = useTodoStore();
+import { useTasksStore } from '@/entities/task/model/store';
+const store = useTasksStore();
 
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
 import {Icon} from '@/shared/icon';
-import {Task} from './task';
+import {Task} from '@/entities/task';
 
 const isShowingMore = ref(false);
 const tasksList = ref<null | HTMLDivElement>(null);
@@ -20,7 +20,7 @@ const buttonMoreTasksText = ref({
 });
 
 const sortedTasks = computed(() => {
-  return store.todos.sort((a,b) => {
+  return store.tasks.sort((a,b) => {
     if(a.status < b.status) return 1;
     if(a.status > b.status) return -1;
     return 0;
@@ -28,7 +28,7 @@ const sortedTasks = computed(() => {
 })
 
 const sortAndSlicedTasks = computed(() => {
-  return store.todos.sort((a,b) => {
+  return store.tasks.sort((a,b) => {
     if(a.status < b.status) return 1;
     if(a.status > b.status) return -1;
     return 0;
@@ -59,7 +59,7 @@ const showOrHideMoreTasks = () => {
     </div>
     <Button
         class="tasks-list__showOrHideButton"
-        v-if="store.todos.length > 5"
+        v-if="store.tasks.length > 5"
         @click="showOrHideMoreTasks"
         text-color="main"
         decoration="outline"

@@ -1,7 +1,7 @@
-interface Todo {
+interface Task {
     text: string,
     id: number,
     status?: string,
 }
 
-export { type Todo };
+export { type Task };

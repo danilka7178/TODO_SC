@@ -7,8 +7,8 @@ import {Button} from "@/shared/button";
 import { v4 as uuidv4 } from 'uuid';
 import {ref, nextTick, watch} from 'vue';
 
-import { useTodoStore } from '@/entities/todo/store';
-const store = useTodoStore();
+import { useTasksStore } from '@/entities/task/model/store';
+const store = useTasksStore();
 
 const emit = defineEmits(['close']);
 const props = defineProps<{
@@ -22,16 +22,16 @@ const oldStatusTask = ref(props.status);
 const oldTextTask = ref(props.text);
 const textTask = ref(props.text);
 const renderComponent = ref(true);
-const sameText = ref(true);
-const sameStatus = ref(true);
+const sameTaskText = ref(true);
+const sameTaskStatus = ref(true);
 
 const handleClickDeleteTask = (id: number) => {
-  store.removeTodo(id);
+  store.removeTask(id);
   emit('close');
 }
 const handleClickEditTask = (id: number) => {
-  store.removeTodo(id);
-  store.addTodo({
+  store.removeTask(id);
+  store.addTask({
     text: textTask.value,
     id: uuidv4(),
     status: statusTask.value,
@@ -55,12 +55,12 @@ const reRenderUI = async () => {
 }
 
 watch(() => textTask.value, () => {
-  sameText.value = oldTextTask.value === textTask.value;
+  sameTaskText.value = oldTextTask.value === textTask.value;
   reRenderUI();
 })
 
 watch(() => statusTask.value, () => {
-  sameStatus.value = statusTask.value === oldStatusTask.value;
+  sameTaskStatus.value = statusTask.value === oldStatusTask.value;
   reRenderUI();
 })
 </script>

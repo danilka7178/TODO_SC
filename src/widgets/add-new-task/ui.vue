@@ -7,8 +7,8 @@ import {Field} from '@/shared/field';
 import {Icon} from "@/shared/icon";
 import {ButtonTaskAdd} from '@/featured/button-task-add';
 
-import { useTodoStore } from '@/entities/todo/store';
-const store = useTodoStore();
+import { useTasksStore } from '@/entities/task/model/store';
+const store = useTasksStore();
 
 const inputValue = ref('');
 
@@ -21,16 +21,16 @@ const onChangeSearch = (value: string) => {
 };
 
 const clickButtonAdd = () => {
-  addNewTodo(inputValue.value);
+  addNewTask(inputValue.value);
 }
 
-const addNewTodo = (todoText: string) => {
-  if(!todoText.length){
+const addNewTask = (taskText: string) => {
+  if(!taskText.length){
     return
   }
 
-  store.addTodo({
-    text: todoText,
+  store.addTask({
+    text: taskText,
     id: uuidv4(),
   });
 
@@ -43,7 +43,7 @@ const addNewTodo = (todoText: string) => {
   <Typography class="add-new-task__header" tagName="h2">Добавить задачу</Typography>
   <div class="add-new-task__content">
     <ButtonTaskAdd @click="clickButtonAdd"/>
-    <Field placeholder="Текст" @onAdd="addNewTodo" @onChange="onChangeSearch" :value="inputValue">
+    <Field placeholder="Текст" @onAdd="addNewTask" @onChange="onChangeSearch" :value="inputValue">
       <template #rightIcon>
         <Icon type='orangeClose'/>
       </template>

@@ -3,8 +3,8 @@ import {ref, computed} from "vue";
 
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
-
 import {DeleteOrEditTask} from "@/featured/delete-or-edit-task";
+
 import { useModalStore } from '@/shared/modal';
 const modal = useModalStore();
 
