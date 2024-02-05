@@ -1,7 +1,7 @@
 interface Task {
     text: string,
-    id: number,
-    status?: string,
+    id: string,
+    status: string,
 }
 
 export { type Task };

@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import {ref} from "vue";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
+import { PlusTask, useTasksStore } from '@/entities/task';
 import {Typography} from "@/shared/typography";
 import {Field} from '@/shared/field';
 import {Icon} from "@/shared/icon";
-import {ButtonTaskAdd} from '@/featured/button-task-add';
 
-import { useTasksStore } from '@/entities/task/model/store';
 const store = useTasksStore();
 
 const inputValue = ref('');
@@ -32,6 +31,7 @@ const addNewTask = (taskText: string) => {
   store.addTask({
     text: taskText,
     id: uuidv4(),
+    status: 'open',
   });
 
   inputValue.value = '';
@@ -42,7 +42,7 @@ const addNewTask = (taskText: string) => {
 <div class="add-new-task">
   <Typography class="add-new-task__header" tagName="h2">Добавить задачу</Typography>
   <div class="add-new-task__content">
-    <ButtonTaskAdd @click="clickButtonAdd"/>
+    <PlusTask @click="clickButtonAdd"/>
     <Field placeholder="Текст" @onAdd="addNewTask" @onChange="onChangeSearch" :value="inputValue">
       <template #rightIcon>
         <Icon type='orangeClose'/>

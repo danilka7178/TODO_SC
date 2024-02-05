@@ -1,1 +1,2 @@
-export { default as Task } from './ui.vue';
+export { type Task, useTasksStore } from './model';
+export { TaskRow,  PlusTask, TaskCountBadge } from './ui';

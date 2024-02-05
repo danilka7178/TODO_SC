@@ -1,21 +1,15 @@
 <script lang="ts" setup>
+import {ref, nextTick, watch} from 'vue';
+import {v4 as uuidv4} from 'uuid';
+import {type Task, useTasksStore} from '@/entities/task';
 import {Icon} from '@/shared/icon';
 import {Typography} from "@/shared/typography";
 import {Field} from "@/shared/field";
 import {Button} from "@/shared/button";
 
-import { v4 as uuidv4 } from 'uuid';
-import {ref, nextTick, watch} from 'vue';
-
-import { useTasksStore } from '@/entities/task/model/store';
 const store = useTasksStore();
-
 const emit = defineEmits(['close']);
-const props = defineProps<{
-  text: string
-  id: number
-  status: string
-}>();
+const props = defineProps<Task>();
 
 const statusTask = ref(props.status);
 const oldStatusTask = ref(props.status);
@@ -25,11 +19,11 @@ const renderComponent = ref(true);
 const sameTaskText = ref(true);
 const sameTaskStatus = ref(true);
 
-const handleClickDeleteTask = (id: number) => {
+const handleClickDeleteTask = (id: string) => {
   store.removeTask(id);
   emit('close');
 }
-const handleClickEditTask = (id: number) => {
+const handleClickEditTask = (id: string) => {
   store.removeTask(id);
   store.addTask({
     text: textTask.value,
@@ -101,7 +95,7 @@ watch(() => statusTask.value, () => {
         <Button
             textColor="white"
             color="orange"
-            :disabled="sameText && sameStatus"
+            :disabled="sameTaskText && sameTaskStatus"
             @click="handleClickEditTask(id)"
         >
           Применить

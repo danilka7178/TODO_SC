@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from "vue";
-import { useModalStore } from './store';
+import {onMounted, onUnmounted} from "vue";
+import {useModalStore} from './store';
+
 const modal = useModalStore();
 
 const handleKeyup = (event: any) => {

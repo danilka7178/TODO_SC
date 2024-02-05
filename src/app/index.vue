@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { Typography } from '@/shared/typography';
-import { Container } from "@/shared/container";
-import { AboutTasks } from "@/widgets/about-tasks";
-import { AddNewTask } from "@/widgets/add-new-task";
-import { TasksList } from "@/widgets/tasks-list";
-import { TasksBoard } from "@/widgets/tasks-board";
+import {AboutTasks} from "@/widgets/about-tasks";
+import {AddNewTask} from "@/widgets/add-new-task";
+import {TasksList} from "@/widgets/tasks-list";
+import {TasksBoard} from "@/widgets/tasks-board";
+import {Typography} from '@/shared/typography';
+import {Container} from "@/shared/container";
 import {Modal} from '@/shared/modal';
 </script>
 
@@ -17,7 +17,7 @@ import {Modal} from '@/shared/modal';
         <AboutTasks class="widget-blocks__widget"/>
         <AddNewTask class="widget-blocks__widget add-task"/>
       </div>
-      <TasksList/>
+      <TasksList />
     </Container>
   </div>
   <Container class="container--white">
@@ -63,9 +63,5 @@ import {Modal} from '@/shared/modal';
     grid-row-gap: 30px;
     margin-bottom: 15px;
   }
-}
-
-@media screen and (max-width: 640px) {
-
 }
 </style>

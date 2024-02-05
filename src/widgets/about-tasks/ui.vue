@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-  import { Typography } from '@/shared/typography';
-  import { TaskInfoBadge } from "./task-info-badge";
+import {TaskCountBadge} from "@/entities/task/";
+import {Typography} from '@/shared/typography';
 </script>
 
 <template>
   <div class="about-tasks">
     <Typography class="about-tasks__header" tagName="h2">Текущие задачи</Typography>
     <div class="about-tasks__badges">
-      <TaskInfoBadge class="about-tasks__badge" type="opened"/>
-      <TaskInfoBadge class="about-tasks__badge" type="inWork"/>
-      <TaskInfoBadge class="about-tasks__badge" type="closed"/>
+      <TaskCountBadge class="about-tasks__badge" type="opened"/>
+      <TaskCountBadge class="about-tasks__badge" type="inWork"/>
+      <TaskCountBadge class="about-tasks__badge" type="closed"/>
     </div>
   </div>
 </template>

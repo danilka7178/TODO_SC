@@ -2,26 +2,26 @@
 </script>
 
 <template>
-  <div class="button-task-add">
-    <span class="plus-strip plus-strip--horizontal"></span>
-    <span class="plus-strip plus-strip--vertical"></span>
+  <div class="plus-task">
+    <span class="plus-task__strip plus-task__strip--horizontal"/>
+    <span class="plus-task__strip"/>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.button-task-add{
+<style lang="scss">
+.plus-task{
+  position: relative;
   width: 45px;
   height: 45px;
   border-radius: 50%;
   background-color: $color-orange;
   cursor: pointer;
-  position: relative;
 
   &:hover{
     opacity: .8;
   }
 
-  .plus-strip{
+  &__strip{
     position: absolute;
     left: 0;
     right: 0;

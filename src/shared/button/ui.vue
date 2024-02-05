@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { useSlots } from 'vue';
+import {useSlots} from 'vue';
 import {Typography} from '@/shared/typography'
+
 interface Props {
   textColor?: 'main' | 'white' | 'black';
   color?: 'orange' | 'white' | 'gray';

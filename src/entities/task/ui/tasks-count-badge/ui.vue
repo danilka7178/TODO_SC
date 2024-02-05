@@ -1,17 +1,16 @@
 <script lang="ts" setup>
-import { Typography } from '@/shared/typography';
-import { Icon } from "@/shared/icon";
-
 import {computed} from "vue";
-import { useTasksStore } from '@/entities/task/model/store';
+
+import {useTasksStore} from '@/entities/task';
+import {Typography} from '@/shared/typography';
+import {Icon} from "@/shared/icon";
+
 const store = useTasksStore();
 
 interface Props {
   type: 'opened' | 'inWork' | 'closed',
 }
-
-const props = defineProps<Props>();
-const { type } = props;
+const { type } = defineProps<Props>();
 
 let iconType = type + 'Tasks';
 

@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import {computed, ref} from "vue";
 
-import { useTasksStore } from '@/entities/task/model/store';
-const store = useTasksStore();
-
+import {TaskRow, useTasksStore} from '@/entities/task';
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
 import {Icon} from '@/shared/icon';
-import {Task} from '@/entities/task';
+
+const store = useTasksStore();
 
 const isShowingMore = ref(false);
 const tasksList = ref<null | HTMLDivElement>(null);
@@ -51,7 +50,7 @@ const showOrHideMoreTasks = () => {
       <Typography v-if="!isMobile" bold tag-name="h3">Статус</Typography>
     </div>
     <div class="tasks-list__body">
-      <Task
+      <TaskRow
           v-for="task in isShowingMore ? sortedTasks : sortAndSlicedTasks"
           :key="task.id"
           :task="task"

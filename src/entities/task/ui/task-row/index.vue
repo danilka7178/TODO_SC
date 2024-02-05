@@ -1,23 +1,14 @@
 <script lang="ts" setup>
-import {ref, computed} from "vue";
-
+import {ref, computed, shallowRef} from "vue";
+import {type Task} from "@/entities/task";
+import {DeleteOrEditTask} from "@/featured/delete-or-edit-task";
 import {Typography} from '@/shared/typography';
 import {Button} from '@/shared/button';
-import {DeleteOrEditTask} from "@/featured/delete-or-edit-task";
+import {useModalStore} from '@/shared/modal';
 
-import { useModalStore } from '@/shared/modal';
 const modal = useModalStore();
-
+const {task} = defineProps<{ task: Task }>();
 const isMobile = ref( window.innerWidth < 640);
-
-interface Props {
-  task: {
-    text: string,
-    id: number,
-    status: string,
-  },
-}
-const props = defineProps<Props>();
 
 const statusTexts: { [key: string]: any } = ref({
   open: 'Открыт',
@@ -26,13 +17,13 @@ const statusTexts: { [key: string]: any } = ref({
 });
 
 const statusText = computed(() => {
-  return statusTexts.value[props.task.status];
+  return statusTexts.value[task.status];
 })
 
 const changeTask = () => {
   modal.open({
-    component: DeleteOrEditTask,
-    componentProps: props.task,
+    component: shallowRef(DeleteOrEditTask),
+    componentProps: task,
   })
 }
 </script>

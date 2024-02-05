@@ -1,31 +1,31 @@
-import { computed, ref } from 'vue';
-import { defineStore } from 'pinia';
+import {computed, ref} from 'vue';
+import {defineStore} from 'pinia';
 import {type Task} from './types';
 
 export const useTasksStore = defineStore('tasks', () => {
     const tasks = ref<Task[]>([
         {
-            id: 0,
+            id: '0',
             text: 'Сварить пельмени',
             status: 'open',
         },
         {
-            id: 1,
+            id: '1',
             text: 'Поднять инфрастуктуру проекта',
             status: 'open',
         },
         {
-            id: 2,
+            id: '2',
             text: 'Проснуться, улыбнуться, сделать отжимания, слетать на Марс и прочитать книгу',
             status: 'inWork',
         },
         {
-            id: 3,
+            id: '3',
             text: 'Поругаться с девопсом',
             status: 'inWork',
         },
         {
-            id: 4,
+            id: '4',
             text: 'Спеть - Знаешь ли ты, вдоль ночных дорог',
             status: 'closed',
         }
@@ -41,7 +41,7 @@ export const useTasksStore = defineStore('tasks', () => {
         tasks.value.unshift(task);
     }
 
-    function removeTask(id: number) {
+    function removeTask(id: string) {
         tasks.value = tasks.value.filter((task: Task) => task.id !== id);
     }
 
