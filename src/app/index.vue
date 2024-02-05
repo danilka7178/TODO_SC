@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import {ref} from 'vue';
 import {AboutTasks} from "@/widgets/about-tasks";
 import {AddNewTask} from "@/widgets/add-new-task";
 import {TasksList} from "@/widgets/tasks-list";
@@ -6,6 +7,8 @@ import {TasksBoard} from "@/widgets/tasks-board";
 import {Typography} from '@/shared/typography';
 import {Container} from "@/shared/container";
 import {Modal} from '@/shared/modal';
+
+const isDesktop = ref(window.innerWidth > 992);
 </script>
 
 <template>
@@ -20,7 +23,7 @@ import {Modal} from '@/shared/modal';
       <TasksList />
     </Container>
   </div>
-  <Container class="container--white">
+  <Container class="container--white" v-if="isDesktop">
     <TasksBoard/>
   </Container>
 </template>
